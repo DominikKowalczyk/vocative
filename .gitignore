@@ -61,3 +61,6 @@ Thumbs.db
 # Ignore PHPStan and Psalm cache files
 /.phpstan/
 /.psalm/
+
+# Ignore gh diff output
+./changes.txt
