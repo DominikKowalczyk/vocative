@@ -1,9 +1,30 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
 use \ML\JsonLD\JsonLD;
+use JsonStreamingParser\Listener\InMemoryListener;
+use JsonStreamingParser\Parser;
+
+class MyListener extends InMemoryListener {
+    protected $tempFileName;
+
+    public function __construct($tempFileName) {
+        $this->tempFileName = $tempFileName;
+    }
+
+    public function processData($data) {
+        // Convert the data to JSON and append it to the temporary file
+        $jsonData = json_encode($data, JSON_UNESCAPED_SLASHES);
+        file_put_contents($this->tempFileName, $jsonData, FILE_APPEND);
+    }
+
+    public function finalize() {
+        // Perform final actions, such as closing the file or processing the collected data
+    }
+}
 
 function fetchAndSaveJsonLd() {
     $jsonLdUrl = 'https://api.dane.gov.pl/resources/54109,lista-imion-meskich-w-rejestrze-pesel-stan-na-19012023-imie-pierwsze/jsonld';
+    $tempFilePath = __DIR__ . '/temp.jsonld';
 
     $contextOptions = [
         'http' => [
@@ -13,21 +34,28 @@ function fetchAndSaveJsonLd() {
     ];
     $context = stream_context_create($contextOptions);
 
-    $jsonLdData = @file_get_contents($jsonLdUrl, false, $context);
-    if ($jsonLdData === false) {
-        throw new Exception("Failed to fetch JSON-LD data from the API. Error: " . error_get_last()['message']);
+    $stream = fopen($jsonLdUrl, 'r', false, $context);
+    if (!$stream) {
+        throw new Exception("Failed to open stream to JSON-LD data.");
     }
 
-    // Save the raw JSON-LD data as a file
-    $jsonFilePath = __DIR__ . '/raw.jsonld';
-    if (@file_put_contents($jsonFilePath, $jsonLdData) === false) {
-        throw new Exception("Failed to save raw JSON-LD data to {$jsonFilePath}. Error: " . error_get_last()['message']);
+    // Delete the temp file if it exists
+    if (file_exists($tempFilePath)) {
+        unlink($tempFilePath);
     }
 
-    // Now process the JSON-LD data using the JsonLD library
+    $listener = new MyListener($tempFilePath);
     try {
+        $parser = new Parser($stream, $listener);
+        $parser->parse();
+        fclose($stream);
+        
+        // Finalize the listener processing
+        $listener->finalize();
+
+        // Now process the temp file with the JsonLD library
         // Expand the JSON-LD document
-        $expanded = JsonLD::expand($jsonFilePath);
+        $expanded = JsonLD::expand($tempFilePath);
 
         // Pretty-print the expanded JSON-LD data
         $prettyJson = JsonLD::toString($expanded, true);
@@ -39,8 +67,14 @@ function fetchAndSaveJsonLd() {
         }
 
         echo "Extracted JSON-LD data successfully saved to {$prettyJsonFilePath}\n";
-    } catch (\Exception $e) {
-        throw new Exception("Error processing JSON-LD data: " . $e->getMessage());
+    } catch (Exception $e) {
+        fclose($stream);
+        throw $e;
+    } finally {
+        // Ensure the temporary file is deleted after processing
+        if (file_exists($tempFilePath)) {
+            unlink($tempFilePath);
+        }
     }
 }
 
