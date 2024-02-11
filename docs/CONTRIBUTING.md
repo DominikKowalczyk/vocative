@@ -10,7 +10,28 @@
 ## Version Control
 
 - Use Git for version control and host your repository on GitHub for collaboration and contributions.
-- Keep a clean commit history and use meaningful commit messages.
+- Keep a clean commit history and use meaningful commit messages in accordance with these rules:
+
+1. **Use Conventional Commits**: Structure your commit messages with a type (`feat`, `fix`, etc.), optional scope, description, and optional body and footer sections.
+
+2. **Imperative Mood**: Write commit messages in the imperative mood, such as "add" instead of "added," to align with `git merge` and `git revert` outputs.
+
+3. **Capitalization and Punctuation**: Capitalize the first word and avoid ending with a period. For Conventional Commits, use all lowercase letters.
+
+4. **Length Limits**: Keep the first line under  50 characters and wrap the body at  72 characters for readability.
+
+5. **Include References**: Reference relevant tickets or GitHub issues within the commit message.
+
+6. **Clear and Direct Content**: Be concise and avoid filler words. Frame the message as if reporting the news of the change.
+
+7. **Commit Often**: Make frequent commits to keep each message succinct and clear.
+
+8. **Avoid Large Pull Requests**: Keep pull requests small and focused for easier review.
+
+9. **Organize Commits Logically**: Divide large features or fixes into smaller, logical commits.
+
+10. **Use Markdown**: Some platforms support basic Markdown formatting in commit messages. Use asterisks for emphasis, square brackets for links, and triple backticks for code blocks.
+
 
 ## Dependency Management
 
