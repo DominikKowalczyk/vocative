@@ -25,7 +25,7 @@ Thumbs.db
 /build/
 /dist/
 /node_modules/
-/vendor/
+/dominikkowalczyk/
 *.log
 *.pot
 *.po

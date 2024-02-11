@@ -1,0 +1,270 @@
+    diff --git a/src/call_gov_API.php b/src/call_gov_API.php
+    index d700598..3183fa7 100644
+    --- a/src/call_gov_API.php
+    +++ b/src/call_gov_API.php
+    @@ -1,33 +1,51 @@
+    <?php
+    -use GuzzleHttp\Client;
+    -
+    -// Create a new Guzzle client
+    -$client = new Client([
+    -    // Base URI is used with relative requests
+    -    'base_uri' => 'https://api.dane.gov.pl/1.4/'
+    -]);
+    -
+    -// Define the endpoint you want to access
+    -$endpoint = 'resources/54109/data'; // Example endpoint for tabular data
+    +require_once __DIR__ . '/../vendor/autoload.php';
+    +use \ML\JsonLD\JsonLD;
+    +
+    +function fetchAndSaveJsonLd() {
+    +    $jsonLdUrl = 'https://api.dane.gov.pl/resources/54109,lista-imion-meskich-w-rejestrze-pesel-stan-na-19012023-imie-pierwsze/jsonld';
+    +
+    +    $contextOptions = [
+    +        'http' => [
+    +            'method' => 'GET',
+    +            'header' => "Accept: application/ld+json\r\n"
+    +        ]
+    +    ];
+    +    $context = stream_context_create($contextOptions);
+    +
+    +    $jsonLdData = @file_get_contents($jsonLdUrl, false, $context);
+    +    if ($jsonLdData === false) {
+    +        throw new Exception("Failed to fetch JSON-LD data from the API. Error: " . error_get_last()['message']);
+    +    }
+    +
+    +    // Save the raw JSON-LD data as a file
+    +    $jsonFilePath = __DIR__ . '/raw.jsonld';
+    +    if (@file_put_contents($jsonFilePath, $jsonLdData) === false) {
+    +        throw new Exception("Failed to save raw JSON-LD data to {$jsonFilePath}. Error: " . error_get_last()['message']);
+    +    }
+    +
+    +    // Now process the JSON-LD data using the JsonLD library
+    +    try {
+    +        // Expand the JSON-LD document
+    +        $expanded = JsonLD::expand($jsonFilePath);
+    +
+    +        // Pretty-print the expanded JSON-LD data
+    +        $prettyJson = JsonLD::toString($expanded, true);
+    +
+    +        // Save the pretty-printed JSON-LD data
+    +        $prettyJsonFilePath = __DIR__ . '/polishnames.json';
+    +        if (@file_put_contents($prettyJsonFilePath, $prettyJson) === false) {
+    +            throw new Exception("Failed to save pretty-printed JSON-LD data to {$prettyJsonFilePath}. Error: " . error_get_last()['message']);
+    +        }
+    +
+    +        echo "Extracted JSON-LD data successfully saved to {$prettyJsonFilePath}\n";
+    +    } catch (\Exception $e) {
+    +        throw new Exception("Error processing JSON-LD data: " . $e->getMessage());
+    +    }
+    +}
+    
+    try {
+    -    // Send a GET request to the API
+    -    $response = $client->request('GET', $endpoint);
+    -
+    -    // Get the status code of the response
+    -    $statusCode = $response->getStatusCode();
+    -
+    -    // Get the body of the response
+    -    $body = $response->getBody()->getContents();
+    -
+    -    // Decode the JSON response
+    -    $data = json_decode($body, true);
+    -
+    -    // Now you can process the data as needed
+    -    // ...
+    -
+    -} catch (\GuzzleHttp\Exception\RequestException $e) {
+    -    // Handle exceptions if any
+    -    echo "Error: " . $e->getMessage();
+    +    fetchAndSaveJsonLd();
+    +} catch (Exception $e) {
+    +    echo "An error occurred: " . $e->getMessage() . "\n";
+    }
+    -?>
+    diff --git a/src/declension.php b/src/declension.php
+    index 7a1dd89..b31c14a 100644
+    --- a/src/declension.php
+    +++ b/src/declension.php
+    @@ -68,6 +68,29 @@ function greetPolitely($name)
+    $jsonContent = file_get_contents('./polishnames.json');
+    $data = json_decode($jsonContent, true);
+    
+    +// Define dark mode styles as a string
+    +$darkModeStyles = "
+    +<style>
+    +    body {
+    +        background-color: #1E1E1E;
+    +        color: #D4D4D4;
+    +        font-family: 'Consolas', 'Menlo', monospace;
+    +    }
+    +    hr {
+    +        border-top:  1px solid #2B2B2B;
+    +    }
+    +    .greeting {
+    +        padding:  10px;
+    +        margin-bottom:  10px;
+    +        border-radius:  5px;
+    +        background-color: #282C34;
+    +    }
+    +</style>
+    +";
+    +
+    +// Output the dark mode styles
+    +echo $darkModeStyles;
+    +
+    foreach ($data['male'] as $name) {
+        echo greetPolitely($name) . "<br><hr>\n";
+    }
+    diff --git a/src/polishnames.json b/src/polishnames.json
+    index db0721d..0637a08 100644
+    --- a/src/polishnames.json
+    +++ b/src/polishnames.json
+    @@ -1,143 +1 @@
+    -{
+    -    "male": [
+    -        "tata",
+    -        "Adolf",
+    -        "Albert",
+    -        "Alojzy",
+    -        "Anicet",
+    -        "Andrzej",
+    -        "Anton",
+    -        "Antoni",
+    -        "Arkadiusz",
+    -        "Daniel",
+    -        "Dariusz",
+    -        "Dobies┼éaw",
+    -        "Dobrogost",
+    -        "Feliks",
+    -        "Florian",
+    -        "Franciszek",
+    -        "Fryderyk",
+    -        "Gerard",
+    -        "Grzegorz",
+    -        "Henryk",
+    -        "Herbert",
+    -        "Hubert",
+    -        "Jacek",
+    -        "Jan",
+    -        "Janek",
+    -        "Janis┼éaw",
+    -        "Janusz",
+    -        "Jarek",
+    -        "Jaromir",
+    -        "Jaros┼éaw",
+    -        "J─Ödrzej",
+    -        "Jeremi",
+    -        "Jerzy",
+    -        "Jozef",
+    -        "Jurand",
+    -        "Jurek",
+    -        "Kacper",
+    -        "Kamil",
+    -        "Karol",
+    -        "Klemens",
+    -        "Kostek",
+    -        "Krystian",
+    -        "Krzysztof",
+    -        "Ksawery",
+    -        "Lech",
+    -        "Leopold",
+    -        "Leszek",
+    -        "Lotar",
+    -        "Lubomir",
+    -        "Lucjan",
+    -        "Ludomir",
+    -        "Ludwik",
+    -        "┼üukasz",
+    -        "Maciej",
+    -        "Maciu┼¢",
+    -        "Maik",
+    -        "Maksymilian",
+    -        "Manuel",
+    -        "Marcin",
+    -        "Marek",
+    -        "Marian",
+    -        "Mariusz",
+    -        "Mateusz",
+    -        "Maurycy",
+    -        "Micha┼é",
+    -        "Mieczys┼éaw",
+    -        "Mieszko",
+    -        "Miko┼éaj",
+    -        "Milan",
+    -        "Milo┼í",
+    -        "Miros┼éaw",
+    -        "Mordechaj",
+    -        "M┼¢ciw├│j",
+    -        "Mstislav",
+    -        "Norbert",
+    -        "Pawe┼é",
+    -        "Piotr",
+    -        "Przemys┼é",
+    -        "Przemys┼éaw",
+    -        "Przybys┼éaw",
+    -        "Tadeusz",
+    -        "Teodor",
+    -        "Teofil",
+    -        "Tomasz",
+    -        "Tomek",
+    -        "Tytus",
+    -        "Vac┼éaw",
+    -        "Waldemar",
+    -        "Walenty",
+    -        "Walery",
+    -        "Wawrzyniec",
+    -        "Wielimir",
+    -        "Wies┼éaw",
+    -        "Wiktor",
+    -        "Witold",
+    -        "W┼éadys┼éaw",
+    -        "W┼éodzimierz",
+    -        "Wojciech"
+    -    ],
+    -    "female": [
+    -        "Natalia",
+    -        "Natasha",
+    -        "Nika",
+    -        "Nina",
+    -        "Ola",
+    -        "Olga",
+    -        "Oliwia",
+    -        "Olivia",
+    -        "Oliwka",
+    -        "Oliwia",
+    -        "Olimpia",
+    -        "Olimpiada",
+    -        "Olimpiada",
+    -        "Orlea",
+    -        "Orzelika",
+    -        "Osanna",
+    -        "Palmira",
+    -        "Patrycja",
+    -        "Patrycjanna",
+    -        "Paula",
+    -        "Paulina",
+    -        "Perpetua",
+    -        "Persida",
+    -        "Petronela",
+    -        "Pia",
+    -        "Pilar",
+    -        "Piasta",
+    -        "Pola",
+    -        "Polina",
+    -        "Pomina",
+    -        "Prakseda",
+    -        "Praska",
+    -        "Prawda",
+    -        "Primitiva",
+    -        "Prudencja",
+    -        "Prusa",
+    -        "Sandra",
+    -        "Ula"
+    -
+    -    ]
+    -}
+    \ No newline at end of file
+    +[]
+    \ No newline at end of file

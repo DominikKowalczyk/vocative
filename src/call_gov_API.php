@@ -1,33 +1,51 @@
 <?php
-use GuzzleHttp\Client;
+require_once __DIR__ . '/../vendor/autoload.php';
+use \ML\JsonLD\JsonLD;
 
-// Create a new Guzzle client
-$client = new Client([
-    // Base URI is used with relative requests
-    'base_uri' => 'https://api.dane.gov.pl/1.4/'
-]);
+function fetchAndSaveJsonLd() {
+    $jsonLdUrl = 'https://api.dane.gov.pl/resources/54109,lista-imion-meskich-w-rejestrze-pesel-stan-na-19012023-imie-pierwsze/jsonld';
 
-// Define the endpoint you want to access
-$endpoint = 'resources/54109/data'; // Example endpoint for tabular data
+    $contextOptions = [
+        'http' => [
+            'method' => 'GET',
+            'header' => "Accept: application/ld+json\r\n"
+        ]
+    ];
+    $context = stream_context_create($contextOptions);
+
+    $jsonLdData = @file_get_contents($jsonLdUrl, false, $context);
+    if ($jsonLdData === false) {
+        throw new Exception("Failed to fetch JSON-LD data from the API. Error: " . error_get_last()['message']);
+    }
+
+    // Save the raw JSON-LD data as a file
+    $jsonFilePath = __DIR__ . '/raw.jsonld';
+    if (@file_put_contents($jsonFilePath, $jsonLdData) === false) {
+        throw new Exception("Failed to save raw JSON-LD data to {$jsonFilePath}. Error: " . error_get_last()['message']);
+    }
+
+    // Now process the JSON-LD data using the JsonLD library
+    try {
+        // Expand the JSON-LD document
+        $expanded = JsonLD::expand($jsonFilePath);
+
+        // Pretty-print the expanded JSON-LD data
+        $prettyJson = JsonLD::toString($expanded, true);
+
+        // Save the pretty-printed JSON-LD data
+        $prettyJsonFilePath = __DIR__ . '/polishnames.json';
+        if (@file_put_contents($prettyJsonFilePath, $prettyJson) === false) {
+            throw new Exception("Failed to save pretty-printed JSON-LD data to {$prettyJsonFilePath}. Error: " . error_get_last()['message']);
+        }
+
+        echo "Extracted JSON-LD data successfully saved to {$prettyJsonFilePath}\n";
+    } catch (\Exception $e) {
+        throw new Exception("Error processing JSON-LD data: " . $e->getMessage());
+    }
+}
 
 try {
-    // Send a GET request to the API
-    $response = $client->request('GET', $endpoint);
-
-    // Get the status code of the response
-    $statusCode = $response->getStatusCode();
-
-    // Get the body of the response
-    $body = $response->getBody()->getContents();
-
-    // Decode the JSON response
-    $data = json_decode($body, true);
-
-    // Now you can process the data as needed
-    // ...
-
-} catch (\GuzzleHttp\Exception\RequestException $e) {
-    // Handle exceptions if any
-    echo "Error: " . $e->getMessage();
+    fetchAndSaveJsonLd();
+} catch (Exception $e) {
+    echo "An error occurred: " . $e->getMessage() . "\n";
 }
-?>

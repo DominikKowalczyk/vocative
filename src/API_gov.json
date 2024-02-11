@@ -1,0 +1,127 @@
+{
+    "data": {
+        "id": "54109",
+        "links": {
+            "self": "https://api.dane.gov.pl/1.4/resources/54109,lista-imion-meskich-w-rejestrze-pesel-stan-na-19012023-imie-pierwsze"
+        },
+        "relationships": {
+            "tabular_data": {
+                "data": {
+                    "id": "54109",
+                    "type": "tabular_data"
+                },
+                "links": {
+                    "related": "https://api.dane.gov.pl/1.4/resources/54109/data"
+                }
+            },
+            "chart": {
+                "data": {
+                    "id": "54109",
+                    "type": "chart"
+                },
+                "links": {
+                    "related": "https://api.dane.gov.pl/1.4/resources/54109,lista-imion-meskich-w-rejestrze-pesel-stan-na-19012023-imie-pierwsze/chart"
+                }
+            },
+            "institution": {
+                "data": {
+                    "id": "333",
+                    "type": "institution"
+                },
+                "links": {
+                    "related": "https://api.dane.gov.pl/1.4/institutions/333,ministerstwo-cyfryzacji"
+                }
+            },
+            "dataset": {
+                "data": {
+                    "id": "1667",
+                    "type": "dataset"
+                },
+                "links": {
+                    "related": "https://api.dane.gov.pl/1.4/datasets/1667,lista-imion-wystepujacych-w-rejestrze-pesel-osoby-zyjace"
+                }
+            }
+        },
+        "attributes": {
+            "format": "xlsx",
+            "csv_download_url": "https://api.dane.gov.pl/resources/54109,lista-imion-meskich-w-rejestrze-pesel-stan-na-19012023-imie-pierwsze/csv",
+            "csv_file_url": "https://api.dane.gov.pl/media/resources/20240126/8_-_Wykaz_imion_m%C4%99skich_os%C3%B3b_%C5%BCyj%C4%85cych_wg_pola_imi%C4%99_pierwsze_wyst%C4%99puj%C4%85cych_w_rejestrze_PESEL_bez_zgon%C3%B3w.csv",
+            "language": "pl",
+            "file_size": 813697,
+            "verified": "2024-01-26T08:14:18Z",
+            "is_chart_creation_blocked": false,
+            "has_dynamic_data": false,
+            "jsonld_download_url": "https://api.dane.gov.pl/resources/54109,lista-imion-meskich-w-rejestrze-pesel-stan-na-19012023-imie-pierwsze/jsonld",
+            "csv_file_size": 866792,
+            "link": "https://api.dane.gov.pl/media/resources/20240126/8_-_Wykaz_imion_m%C4%99skich_os%C3%B3b_%C5%BCyj%C4%85cych_wg_pola_imi%C4%99_pierwsze_wyst%C4%99puj%C4%85cych_w_rejestrze_PESEL_bez_zgon%C3%B3w.xlsx",
+            "file_url": "https://api.dane.gov.pl/media/resources/20240126/8_-_Wykaz_imion_m%C4%99skich_os%C3%B3b_%C5%BCyj%C4%85cych_wg_pola_imi%C4%99_pierwsze_wyst%C4%99puj%C4%85cych_w_rejestrze_PESEL_bez_zgon%C3%B3w.xlsx",
+            "jsonld_file_url": "https://api.dane.gov.pl/media/resources/20240126/8_-_Wykaz_imion_m%C4%99skich_os%C3%B3b_%C5%BCyj%C4%85cych_wg_pola_imi%C4%99_pierwsze_wyst%C4%99puj%C4%85cych_w_rejestrze_PESEL_bez_zgon%C3%B3w.jsonld",
+            "has_high_value_data": false,
+            "views_count": 3167,
+            "regions": [
+                {
+                    "hierarchy_label": "Polska",
+                    "region_id": "85633723",
+                    "is_additional": false,
+                    "name": "Polska"
+                }
+            ],
+            "jsonld_file_size": 48532381,
+            "files": [
+                {
+                    "format": "xlsx",
+                    "openness_score": 2,
+                    "download_url": "https://api.dane.gov.pl/resources/54109,lista-imion-meskich-w-rejestrze-pesel-stan-na-19012023-imie-pierwsze/file",
+                    "file_size": 813697,
+                    "compressed_file_format": null
+                },
+                {
+                    "format": "csv",
+                    "openness_score": 3,
+                    "download_url": "https://api.dane.gov.pl/resources/54109,lista-imion-meskich-w-rejestrze-pesel-stan-na-19012023-imie-pierwsze/csv",
+                    "file_size": 866792,
+                    "compressed_file_format": null
+                },
+                {
+                    "format": "jsonld",
+                    "openness_score": 4,
+                    "download_url": "https://api.dane.gov.pl/resources/54109,lista-imion-meskich-w-rejestrze-pesel-stan-na-19012023-imie-pierwsze/jsonld",
+                    "file_size": 48532381,
+                    "compressed_file_format": null
+                }
+            ],
+            "has_research_data": false,
+            "visualization_types": [
+                "table"
+            ],
+            "download_url": "https://api.dane.gov.pl/resources/54109,lista-imion-meskich-w-rejestrze-pesel-stan-na-19012023-imie-pierwsze/file",
+            "supplements": [],
+            "description": "<p>lista imion m\u0119skich w rejestrze PESEL\u00a0wg pola: imi\u0119 pierwsze, stan na 19.01.2024</p>",
+            "special_signs": [],
+            "openness_score": 4,
+            "created": "2024-01-26T08:03:28Z",
+            "modified": "2024-01-26T08:11:00Z",
+            "data_date": "2024-01-19",
+            "category": "Spo\u0142ecze\u0144stwo",
+            "title": "lista imion m\u0119skich w rejestrze PESEL stan na 19.01.2024 - imi\u0119 pierwsze",
+            "media_type": "file",
+            "downloads_count": 1827
+        },
+        "type": "resource"
+    },
+    "links": {
+        "self": "http://api.dane.gov.pl/1.4/resources/54109,lista-imion-meskich-w-rejestrze-pesel-stan-na-19012023-imie-pierwsze?lang=pl"
+    },
+    "meta": {
+        "language": "pl",
+        "server_time": "2024-02-11T16:51:28Z",
+        "relative_uri": "/1.4/resources/54109,lista-imion-meskich-w-rejestrze-pesel-stan-na-19012023-imie-pierwsze?lang=pl",
+        "params": {
+            "lang": "pl"
+        },
+        "path": "/1.4/resources/54109,lista-imion-meskich-w-rejestrze-pesel-stan-na-19012023-imie-pierwsze"
+    },
+    "jsonapi": {
+        "version": "1.0"
+    }
+}

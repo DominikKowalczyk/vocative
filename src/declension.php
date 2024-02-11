@@ -68,6 +68,29 @@ function greetPolitely($name)
 $jsonContent = file_get_contents('./polishnames.json');
 $data = json_decode($jsonContent, true);
 
+// Define dark mode styles as a string
+$darkModeStyles = "
+<style>
+    body {
+        background-color: #1E1E1E;
+        color: #D4D4D4;
+        font-family: 'Consolas', 'Menlo', monospace;
+    }
+    hr {
+        border-top:  1px solid #2B2B2B;
+    }
+    .greeting {
+        padding:  10px;
+        margin-bottom:  10px;
+        border-radius:  5px;
+        background-color: #282C34;
+    }
+</style>
+";
+
+// Output the dark mode styles
+echo $darkModeStyles;
+
 foreach ($data['male'] as $name) {
     echo greetPolitely($name) . "<br><hr>\n";
 }
