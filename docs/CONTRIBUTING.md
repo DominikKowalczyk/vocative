@@ -2,12 +2,14 @@
 
 ## General Principles
 
-- Adhere to the PHP Framework Interop Group (FIG) recommendations, particularly PSR-1, PSR-12, PSR-4, and PER Coding Style for coding standards [1].
-- Ensure your code follows a consistent style, which can be enforced using tools like PHP_CodeSniffer, PHP Coding Standards Fixer, or PHP Code Beautifier and Fixer [1].
+- Adhere to the PHP Framework Interop Group (FIG) recommendations, particularly PSR-1, PSR-12, PSR-4, and PER Coding Style for coding standards.
+- Ensure your code follows a consistent style, which can be enforced using tools like PHP_CodeSniffer, PHP Coding Standards Fixer, or PHP Code Beautifier and Fixer.
+- For more details please read our style guidelines. Please ensure that your code adheres to our [Coding Style Guidelines](./CODE-STYLE.md).
+
 
 ## Version Control
 
-- Use Git for version control and host your repository on a platform like GitHub for collaboration and contributions.
+- Use Git for version control and host your repository on GitHub for collaboration and contributions.
 - Keep a clean commit history and use meaningful commit messages.
 
 ## Dependency Management

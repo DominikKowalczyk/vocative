@@ -36,6 +36,8 @@
 ## Contributing
 
 - Instructions for contributing to the library, including coding standards, pull request procedures, and issue reporting.
+For more information on how to contribute to this project, please refer to our [Contributing Guidelines](./CONTRIBUTING.md).
+
 
 ## License
 
