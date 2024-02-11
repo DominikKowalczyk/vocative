@@ -1,0 +1,63 @@
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore editor files and directories
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*.bak
+*.orig
+*.tmp
+
+# Ignore OS generated files
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Ignore build artifacts and compiled code
+/build/
+/dist/
+/node_modules/
+/vendor/
+*.log
+*.pot
+*.po
+*.mo
+
+# Ignore Composer dependencies
+/vendor/
+
+# Ignore environment-specific configuration files
+/.env
+
+# Ignore cache directories
+/var/cache/
+/var/logs/
+
+# Ignore PHPUnit coverage reports
+/coverage/
+
+# Ignore local environment configuration files
+/*.local.php
+
+# Ignore OS-specific files
+/*.osx
+/*.windows
+/*.linux
+
+# Ignore IDE-specific files
+/*.idea
+/*.vscode
+/*.sublime-project
+/*.sublime-workspace
+
+# Ignore PHPStan and Psalm cache files
+/.phpstan/
+/.psalm/
