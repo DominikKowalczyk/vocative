@@ -4,7 +4,7 @@
 
 - Adhere to the PHP Framework Interop Group (FIG) recommendations, particularly PSR-1, PSR-12, PSR-4, and PER Coding Style for coding standards.
 - Ensure your code follows a consistent style, which can be enforced using tools like PHP_CodeSniffer, PHP Coding Standards Fixer, or PHP Code Beautifier and Fixer.
-- For more details please read our style guidelines. Please ensure that your code adheres to our [Coding Style Guidelines](./CODE-STYLE.md).
+- For more details please read our style guidelines. Please ensure that your code adheres to our [Coding Style Guidelines](./CODE_STYLE.md).
 
 
 ## Version Control
