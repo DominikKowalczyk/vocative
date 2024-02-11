@@ -1,7 +1,5 @@
 # Code Style Guidelines
 
----
-
 ## Table of Contents
 
 - [PSR-1: Basic Coding Standard](#psr-1-basic-coding-standard)
@@ -9,75 +7,70 @@
 - [PSR-4: Autoloader](#psr-4-autoloader)
 - [PER Coding Style](#per-coding-style)
 
+---
+
 ### PSR-1: Basic Coding Standard
 
-[PSR-1](https://www.php-fig.org/psr/psr-1/) is the basic coding standard that serves as the foundation for all other PSR standards. It focuses on essential elements of PHP code such as naming conventions, file organization, and class structures. Key aspects include:
+[PSR-1](https://www.php-fig.org/psr/psr-1/) sets the basic coding standard, forming the groundwork for all other PSR standards. Adhere to these essential elements of PHP code such as naming conventions, file organization, and class structures. Key directives include:
 
-- Using only `<?php` and `<?=` tags.
-- Using UTF-8 without BOM for PHP code.
-- Declaring one class per file.
-- Namespaces and classes must follow an "autoloading" PSR (PSR-4).
+- Use only `<?php` and `<?=` tags.
+- Employ UTF-8 without BOM for PHP code.
+- Declare one class per file.
+- Follow an "autoloading" PSR (PSR-4) for namespaces and classes.
 
 #### Classes
 
-- Class names should be declared in `StudlyCaps`.
-- Each class should be contained in its own file.
-- The filename should match the class name. For example, a class `MyClassName` should be declared in a file named `MyClassName.php`.
+- Declare class names in `StudlyCaps`.
+- Contain each class in its own file.
+- Match the filename with the class name. For instance, a class `MyClassName` should reside in a file named `MyClassName.php`.
 
 #### Interfaces
 
-- Interface names should be declared in `StudlyCaps`.
-- Similar to classes, each interface should be contained in its own file.
-- The filename should match the interface name. For example, an interface `MyInterface` should be declared in a file named `MyInterface.php`.
-- Interfaces must be suffixed with Interface. For example, `src\Interfaces\MyInterface.php`
+- Declare interface names in `StudlyCaps`.
+- Similar to classes, place each interface in its own file.
+- Match the filename with the interface name, suffixed with Interface. For instance, `src\Interfaces\MyInterface.php`.
 
 #### Traits
 
-- Trait names should be declared in `StudlyCaps`.
-- Each trait should be contained in its own file.
-- The filename should match the trait name. For example, a trait `MyTrait` should be declared in a file named `MyTrait.php`.
-- Traits must be suffixed with Trait, for example, `src\Interfaces\MyTrait.php`
+- Declare trait names in `StudlyCaps`.
+- Place each trait in its own file.
+- Match the filename with the trait name, suffixed with Trait. For example, `src\Interfaces\MyTrait.php`.
 
 ### PSR-12: Extended Coding Style Guide
 
 #### Methods
 
-- Method names should be declared in `camelCase()`.
-- The first word should be a verb. For example, `calculateSum()`, `getUserName()`.
+- Declare method names in `camelCase()`.
+- Begin with a verb. For example, `calculateSum()`, `getUserName()`.
 
 #### Properties
 
-- Property names should be declared in `$camelCase`.
-- The first word should be a noun. For example, `$propertyName`, `$objectList`.
+- Declare property names in `$camelCase`.
+- Begin with a noun. For example, `$propertyName`, `$objectList`.
 
 #### Constants
 
-- Constant names should be declared in uppercase letters with underscores separating words. For example, `MAXIMUM_VALUE`.
-- Constants should be defined within the scope where they are relevant.
+- Declare constant names in uppercase letters with underscores separating words. For example, `MAXIMUM_VALUE`.
+- Define constants within the relevant scope.
 
 ### PSR-12: Extended Coding Style Guide
 
-[PSR-12](https://www.php-fig.org/psr/psr-12/) extends PSR-1 with more detailed rules for code formatting. It covers topics such as:
-
-- Indentation, line ending characters, and whitespace issues.
-- Proper placement of `declare` statements when present.
-- Omitting closing PHP tags in files containing only PHP code.
-- Correct use of `use` statements.
+[PSR-12](https://www.php-fig.org/psr/psr-12/) builds upon PSR-1 with detailed rules for code formatting, covering indentation, line endings, whitespace, `declare` statements, and `use` statements.
 
 ### PSR-4: Autoloader
 
-[PSR-4](https://www.php-fig.org/psr/psr-4/) introduces a standardized autoloading mechanism for PHP classes. It ensures that your library can easily integrate with Composer's autoloading capabilities, making it easier for others to use your code. PSR-4 defines:
+[PSR-4](https://www.php-fig.org/psr/psr-4/) introduces a standardized autoloading mechanism for PHP classes, ensuring easy integration with Composer's autoloading capabilities. PSR-4 specifies:
 
-- A specification for autoloading classes from file paths.
-- Fully interoperable with any other autoloading specification, including PSR-0.
-- Where to place files that will be auto-loaded according to the specification.
+- Autoloading classes from file paths.
+- Full interoperability with other autoloading specifications, including PSR-0.
+- File placement for auto-loaded files according to the specification.
 
 ### PER Coding Style
 
-PER stands for PHP Extended Recommendations, which is a set of extended coding style guidelines that complement the PSR standards. It generally refers to a stricter version of PSR-2, which has been deprecated in favor of PSR-12. PER emphasizes:
+PER (PHP Extended Recommendations) provides extended coding style guidelines complementing the PSR standards. It emphasizes:
 
-- Consistent and readable code.
+- Consistency and readability.
 - Clear separation of concerns.
 - Enhanced readability and maintainability.
 
-By adhering to these standards, you ensure that your library is compatible with other PHP projects, follows widely accepted best practices, and is easier for developers to understand and maintain.
+Adhere to these standards to ensure compatibility with other PHP projects, follow widely accepted best practices, and make your code easier for developers to understand and maintain.
