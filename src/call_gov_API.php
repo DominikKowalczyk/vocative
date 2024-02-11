@@ -48,10 +48,14 @@ function fetchAndSaveJsonLd() {
     try {
         $parser = new Parser($stream, $listener);
         $parser->parse();
-        fclose($stream);
         
         // Finalize the listener processing
         $listener->finalize();
+
+        // Only close the stream if it is a valid resource
+        if (is_resource($stream)) {
+            fclose($stream);
+        }
 
         // Now process the temp file with the JsonLD library
         // Expand the JSON-LD document
@@ -68,7 +72,10 @@ function fetchAndSaveJsonLd() {
 
         echo "Extracted JSON-LD data successfully saved to {$prettyJsonFilePath}\n";
     } catch (Exception $e) {
-        fclose($stream);
+        // Close the stream only if it is still a valid resource
+        if (is_resource($stream)) {
+            fclose($stream);
+        }
         throw $e;
     } finally {
         // Ensure the temporary file is deleted after processing
