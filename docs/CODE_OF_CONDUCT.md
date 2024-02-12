@@ -82,8 +82,6 @@ We strive to create an inclusive environment where everyone, regardless of backg
 
 ## II. Guidelines for Effective Communication, Logical Reasoning, and Discussion Techniques
 
-```markdown
-## Code of Conduct: Guidelines for Effective Communication, Logical Reasoning, and Discussion Techniques
 
 1. **Prioritize Clarity**:
    - Speak clearly, avoiding unnecessary jargon to ensure your message is understood by everyone involved.
@@ -214,7 +212,6 @@ We strive to create an inclusive environment where everyone, regardless of backg
 32. **Avoid Assumptions**:
     - Guard against unfounded assumptions and generalizations that obscure truth and credibility.
     - e.g. Ask for clarification instead of making assumptions about others' intentions or capabilities, which can lead to miscommunication and misunderstanding.
-```
 
 ## Attribution
 
